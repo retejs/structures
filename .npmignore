@@ -1,0 +1,7 @@
+node_modules
+.idea/
+.vscode/
+coverage
+.nyc_output
+src
+test

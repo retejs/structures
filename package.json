@@ -1,0 +1,25 @@
+{
+  "name": "rete-structures",
+  "version": "2.0.0-beta.1",
+  "description": "",
+  "main": "build/structures.common.js",
+  "module": "build/structures.esm.js",
+  "types": "types",
+  "scripts": {
+    "build": "rete build -c rete.config.ts",
+    "build:dev": "rete build -c rete.config.ts --watch",
+    "prepublishOnly": "npm run build",
+    "test": "rete test",
+    "lint": "rete lint"
+  },
+  "author": "",
+  "license": "MIT",
+  "peerDependencies": {
+    "rete": "file:../rete/rete-2.0.0-beta.1.tgz"
+  },
+  "devDependencies": {
+    "rete": "file:../rete/rete-2.0.0-beta.1.tgz",
+    "rete-cli": "1.0.0-beta.15",
+    "typescript": "4.8.4"
+  }
+}
