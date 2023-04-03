@@ -4,18 +4,17 @@
   "description": "",
   "scripts": {
     "build": "rete build -c rete.config.ts",
-    "build:dev": "rete build -c rete.config.ts --watch",
     "lint": "rete lint",
     "test": "rete test"
   },
   "author": "",
   "license": "MIT",
   "peerDependencies": {
-    "rete": "file:../rete/dist/package.tgz"
+    "rete": "^2.0.0-beta.1"
   },
   "devDependencies": {
-    "rete": "file:../rete/dist/package.tgz",
-    "rete-cli": "file:../rete-cli/rete-cli-1.0.0-beta.21.tgz",
+    "rete": "^2.0.0-beta.1",
+    "rete-cli": "^1.0.0-beta.25",
     "typescript": "4.8.4"
   }
 }
