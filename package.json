@@ -8,7 +8,7 @@
     "test": "rete test"
   },
   "author": "",
-  "license": "MIT",
+  "license": "",
   "peerDependencies": {
     "rete": "^2.0.0-beta.1"
   },
