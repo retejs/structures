@@ -14,7 +14,7 @@ Rete.js Structures
 
 ## Getting Started
 
-Please refer to the [guide](https://retejs.org/docs/guides/structures#interactive-connections) and [example](https://retejs.org/examples/structures) using this plugin
+Please refer to the [guide](https://retejs.org/docs/guides/structures) and [example](https://retejs.org/examples/structures) using this plugin
 
 ## Contribution
 
