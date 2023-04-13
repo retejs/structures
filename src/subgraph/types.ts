@@ -6,5 +6,6 @@ export type Subgraph<N extends BaseN, C extends BaseC> = {
   descendants(selector?: (node: N) => boolean): Structures<N, C>
   ancestors(selector?: (node: N) => boolean, localContext?: Context<N, C>): Structures<N, C>
   orphans(): Structures<N, C>
+  siblings(selector?: (node: N) => boolean): Structures<N, C>
 }
 

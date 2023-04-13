@@ -91,11 +91,23 @@ export function getSubgraph<N extends BaseN, C extends BaseC>(data: Data<N, C>) 
     })
   }
 
+  const siblings: Subgraph<N, C>['siblings'] = (selector = Boolean) => {
+    const nodes = data.nodes.filter(selector)
+    const parents = nodes.map(n => n.parent)
+    const sibs = data.nodes.filter(n => parents.includes(n.parent))
+
+    return structures({
+      nodes: sibs,
+      connections: getConnectionsFor(sibs, data.connections)
+    })
+  }
+
   return {
     children: getChildren,
     parents: getParents,
     descendants,
     ancestors: getAncestors,
-    orphans
+    orphans,
+    siblings
   }
 }

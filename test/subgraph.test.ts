@@ -2,6 +2,7 @@
 import { describe, expect, it } from '@jest/globals'
 
 import { structures } from '../src'
+import { Node } from './utils'
 import { createCompound } from './utils/editors'
 
 describe('Subgraph', () => {
@@ -47,5 +48,22 @@ describe('Subgraph', () => {
     expect(graph.descendants(n => n.id === b.id).nodes()).toHaveLength(1)
     expect(graph.descendants(n => n.id === b.id).nodes().map(n => n.id)).toEqual([a.id])
     expect(graph.descendants(n => n.id === d.id).nodes()).toHaveLength(0)
+  })
+
+  it('siblings', async () => {
+    const { b, c, d, editor } = await createCompound()
+    const graph = structures(editor)
+
+    expect(graph.siblings(n => n.id === c.id).nodes()).toHaveLength(2)
+    expect(graph.siblings(n => n.id === c.id).nodes().map(n => n.id).sort()).toEqual([c.id, d.id].sort())
+
+    const e = new Node('a')
+
+    e.parent = c.id
+
+    await editor.addNode(e)
+
+    expect(graph.siblings(n => n.id === e.id).nodes()).toHaveLength(2)
+    expect(graph.siblings(n => n.id === e.id).nodes().map(n => n.id).sort()).toEqual([b.id, e.id].sort())
   })
 })
