@@ -21,4 +21,23 @@ describe('Subgraph', () => {
     expect(graph.parents(n => n.id === a.id).nodes().map(n => n.id)).toEqual([b.id, c.id])
     expect(graph.parents(n => n.id === b.id).nodes().map(n => n.id)).toEqual([c.id])
   })
+
+  it('orphans', async () => {
+    const { c, d, editor } = await createCompound()
+    const graph = structures(editor)
+
+    expect(graph.orphans().nodes()).toHaveLength(2)
+    expect(graph.orphans().nodes().map(n => n.id).sort()).toEqual([c.id, d.id].sort())
+  })
+
+  it('descendants', async () => {
+    const { a, b, c, d, editor } = await createCompound()
+    const graph = structures(editor)
+
+    expect(graph.descendants(n => n.id === c.id).nodes()).toHaveLength(2)
+    expect(graph.descendants(n => n.id === c.id).nodes().map(n => n.id).sort()).toEqual([a.id, b.id].sort())
+    expect(graph.descendants(n => n.id === b.id).nodes()).toHaveLength(1)
+    expect(graph.descendants(n => n.id === b.id).nodes().map(n => n.id)).toEqual([a.id])
+    expect(graph.descendants(n => n.id === d.id).nodes()).toHaveLength(0)
+  })
 })

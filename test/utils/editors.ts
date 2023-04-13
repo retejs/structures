@@ -24,7 +24,7 @@ export async function createCompound() {
   const a = new Node('a')
   const b = new Node('b')
   const c = new Node('c')
-  const d = new Node('c')
+  const d = new Node('d')
 
   a.parent = b.id
   b.parent = c.id
