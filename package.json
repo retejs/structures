@@ -28,7 +28,7 @@
   },
   "devDependencies": {
     "rete": "^2.0.0-beta.6",
-    "rete-cli": "^1.0.0-beta.25",
+    "rete-cli": "^1.0.0-beta.29",
     "typescript": "4.8.4"
   }
 }
