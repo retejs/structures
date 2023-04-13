@@ -8,7 +8,7 @@
     "test": "rete test"
   },
   "author": "Vitaliy Stoliarov",
-  "license": "",
+  "license": "CC-BY-NC-SA-4.0",
   "keywords": [
     "structures",
     "algorithms",
@@ -24,10 +24,10 @@
     "url": "https://github.com/retejs/structures/issues"
   },
   "peerDependencies": {
-    "rete": "^2.0.0-beta.1"
+    "rete": "^2.0.0-beta.6"
   },
   "devDependencies": {
-    "rete": "^2.0.0-beta.1",
+    "rete": "^2.0.0-beta.6",
     "rete-cli": "^1.0.0-beta.25",
     "typescript": "4.8.4"
   }
