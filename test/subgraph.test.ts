@@ -14,12 +14,20 @@ describe('Subgraph', () => {
   })
 
   it('parents', async () => {
+    const { a, b, editor } = await createCompound()
+    const graph = structures(editor)
+
+    expect(graph.parents(n => n.id === a.id).nodes()).toHaveLength(1)
+    expect(graph.parents(n => n.id === a.id).nodes().map(n => n.id).sort()).toEqual([b.id].sort())
+  })
+
+  it('ancestors', async () => {
     const { a, b, c, editor } = await createCompound()
     const graph = structures(editor)
 
-    expect(graph.parents().nodes()).toHaveLength(2)
-    expect(graph.parents(n => n.id === a.id).nodes().map(n => n.id)).toEqual([b.id, c.id])
-    expect(graph.parents(n => n.id === b.id).nodes().map(n => n.id)).toEqual([c.id])
+    expect(graph.ancestors().nodes()).toHaveLength(2)
+    expect(graph.ancestors(n => n.id === a.id).nodes().map(n => n.id)).toEqual([b.id, c.id])
+    expect(graph.ancestors(n => n.id === b.id).nodes().map(n => n.id)).toEqual([c.id])
   })
 
   it('orphans', async () => {

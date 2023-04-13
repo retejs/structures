@@ -11,6 +11,7 @@ export function getSubgraph<N extends BaseN, C extends BaseC>(data: Data<N, C>) 
 
     return data.nodes.filter(n => 'parent' in n && n.parent && ids.includes(n.parent))
   }
+
   const getChildren: Subgraph<N, C>['children'] = (selector = Boolean) => {
     const nodes = _children(data.nodes.filter(selector))
 
@@ -19,6 +20,18 @@ export function getSubgraph<N extends BaseN, C extends BaseC>(data: Data<N, C>) 
       connections: getConnectionsFor(nodes, data.connections)
     })
   }
+
+  const getParents: Subgraph<N, C>['children'] = (selector = Boolean) => {
+    const nodes = data.nodes.filter(selector)
+    const ids = nodes.map(n => n.parent)
+    const parents = data.nodes.filter(n => ids.includes(n.id))
+
+    return structures({
+      nodes: parents,
+      connections: getConnectionsFor(parents, data.connections)
+    })
+  }
+
   const _descendants = (nodes: N[], ids: NodeId[]) => {
     const children = nodes.filter(n => 'parent' in n && n.parent && ids.includes(n.parent))
     const result = [...children]
@@ -29,6 +42,7 @@ export function getSubgraph<N extends BaseN, C extends BaseC>(data: Data<N, C>) 
 
     return result
   }
+
   const descendants: Subgraph<N, C>['descendants'] = (selector = Boolean) => {
     const nodes = _descendants(data.nodes, data.nodes.filter(selector).map(n => n.id))
 
@@ -37,6 +51,7 @@ export function getSubgraph<N extends BaseN, C extends BaseC>(data: Data<N, C>) 
       connections: getConnectionsFor(nodes, data.connections)
     })
   }
+
   const _parents = (ids: NodeId[], local: Data<N, C> = data) => {
     const parentIds = new Set<NodeId>()
     const targetParentIds = new Set(ids.map(id => getNode(local.nodes, id).parent))
@@ -56,7 +71,7 @@ export function getSubgraph<N extends BaseN, C extends BaseC>(data: Data<N, C>) 
     return Array.from(parentIds)
   }
 
-  const getParents: Subgraph<N, C>['parents'] = (selector = Boolean, localContext) => {
+  const getAncestors: Subgraph<N, C>['ancestors'] = (selector = Boolean, localContext) => {
     const local = localContext ? getContextData(localContext) : data
     const ids = _parents(data.nodes.filter(selector).map(n => n.id), local)
     const nodes = ids.map(id => getNode(local.nodes, id))
@@ -66,6 +81,7 @@ export function getSubgraph<N extends BaseN, C extends BaseC>(data: Data<N, C>) 
       connections: getConnectionsFor(nodes, local.connections)
     })
   }
+
   const orphans: Subgraph<N, C>['orphans'] = () => {
     const nodes = data.nodes.filter(n => !n.parent)
 
@@ -77,8 +93,9 @@ export function getSubgraph<N extends BaseN, C extends BaseC>(data: Data<N, C>) 
 
   return {
     children: getChildren,
-    descendants,
     parents: getParents,
+    descendants,
+    ancestors: getAncestors,
     orphans
   }
 }
