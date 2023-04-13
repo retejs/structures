@@ -7,11 +7,14 @@ Rete.js Structures
 
 ## Key features
 
--
+- **Mapping**: filter by nodes and connections
+- **Sets**: union, difference, intersect
+- **Subgraph**: children, parents, descendants, ancestors, orphans, siblings
+- **Traverse**: roots, leaves, incomers, outgoers, successors, predecessors
 
 ## Getting Started
 
-Please refer to the [guide](https://retejs.org/docs/guides/basic#interactive-connections) and [example](https://retejs.org/examples) using this plugin
+Please refer to the [guide](https://retejs.org/docs/guides/structures#interactive-connections) and [example](https://retejs.org/examples/structures) using this plugin
 
 ## Contribution
 
