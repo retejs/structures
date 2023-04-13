@@ -2,7 +2,7 @@ import { NodeId } from 'rete'
 
 import { structures } from '..'
 import { BaseC, BaseN, Data } from '../types'
-import { getConnectionsFor, getContextData, getNode } from '../utils'
+import { getConnectionsFor, getNode } from '../utils'
 import { Subgraph } from './types'
 
 export function getSubgraph<N extends BaseN, C extends BaseC>(data: Data<N, C>) {
@@ -71,14 +71,13 @@ export function getSubgraph<N extends BaseN, C extends BaseC>(data: Data<N, C>) 
     return Array.from(parentIds)
   }
 
-  const getAncestors: Subgraph<N, C>['ancestors'] = (selector = Boolean, localContext) => {
-    const local = localContext ? getContextData(localContext) : data
-    const ids = _parents(data.nodes.filter(selector).map(n => n.id), local)
-    const nodes = ids.map(id => getNode(local.nodes, id))
+  const getAncestors: Subgraph<N, C>['ancestors'] = (selector = Boolean) => {
+    const ids = _parents(data.nodes.filter(selector).map(n => n.id), data)
+    const nodes = ids.map(id => getNode(data.nodes, id))
 
     return structures({
       nodes,
-      connections: getConnectionsFor(nodes, local.connections)
+      connections: getConnectionsFor(nodes, data.connections)
     })
   }
 
