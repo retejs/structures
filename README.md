@@ -22,4 +22,4 @@ Please refer to the [Contribution](https://retejs.org/docs/contribution) guide
 
 ## License
 
-[MIT](https://github.com/retejs/structures/blob/master/LICENSE)
+[CC-BY-NC-SA-4.0](https://github.com/retejs/structures/blob/main/LICENSE)
