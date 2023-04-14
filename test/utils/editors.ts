@@ -13,6 +13,7 @@ export async function createSequentABC() {
   await editor.addNode(b)
   await editor.addNode(c)
   await editor.addConnection(new Connection(a, 'output1', b, 'input1'))
+  await editor.addConnection(new Connection(a, 'output2', b, 'input2'))
   await editor.addConnection(new Connection(b, 'output1', c, 'input1'))
 
   return { a, b, c, editor }

@@ -35,10 +35,11 @@ export function getTraverse<N extends BaseN, C extends BaseC>(data: Data<N, C>) 
         if (!node) throw new Error('node')
         return node
       })
+    const uniqueNodes = Array.from(new Set(nodes))
 
     return structures({
-      nodes,
-      connections: getConnectionsFor(nodes, data.connections)
+      nodes: uniqueNodes,
+      connections: getConnectionsFor(uniqueNodes, data.connections)
     })
   }
   const outgoers: Traverse<N, C>['outgoers'] = (id, selector = Boolean) => {
@@ -59,10 +60,11 @@ export function getTraverse<N extends BaseN, C extends BaseC>(data: Data<N, C>) 
         if (!node) throw new Error('node')
         return node
       })
+    const uniqueNodes = Array.from(new Set(nodes))
 
     return structures({
-      nodes,
-      connections: getConnectionsFor(nodes, data.connections)
+      nodes: uniqueNodes,
+      connections: getConnectionsFor(uniqueNodes, data.connections)
     })
   }
   const collectSuccessors = (id: NodeId, set: Set<N['id']>, selector: (node: N, con: C) => boolean) => {
