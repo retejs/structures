@@ -26,9 +26,18 @@ export function getTraverse<N extends BaseN, C extends BaseC>(data: Data<N, C>) 
       connections: getConnectionsFor(nodes, data.connections)
     })
   }
-  const incomers: Traverse<N, C>['incomers'] = (id) => {
+  const incomers: Traverse<N, C>['incomers'] = (id, selector = Boolean) => {
     const nodes = data.connections
-      .filter(c => c.target === id)
+      .filter(c => {
+        const match = c.target === id
+
+        if (selector === Boolean) return match
+        const node = data.nodes.find(n => n.id === c.source)
+
+        if (!node) throw new Error('node')
+
+        return match && selector(node, c)
+      })
       .map(c => {
         const node = data.nodes.find(n => n.id === c.source)
 
@@ -87,18 +96,18 @@ export function getTraverse<N extends BaseN, C extends BaseC>(data: Data<N, C>) 
       connections: getConnectionsFor(nodes, data.connections)
     })
   }
-  const collectPredecessors = (id: NodeId, set: Set<N['id']>) => {
-    for (const item of incomers(id).nodes()) {
+  const collectPredecessors = (id: NodeId, set: Set<N['id']>, selector: (node: N, con: C) => boolean) => {
+    for (const item of incomers(id, selector).nodes()) {
       if (!set.has(item.id)) {
         set.add(item.id)
-        collectPredecessors(item.id, set)
+        collectPredecessors(item.id, set, selector)
       }
     }
   }
-  const predecessors: Traverse<N, C>['predecessors'] = (id) => {
+  const predecessors: Traverse<N, C>['predecessors'] = (id, selector = Boolean) => {
     const nodesSet = new Set<N['id']>()
 
-    collectPredecessors(id, nodesSet)
+    collectPredecessors(id, nodesSet, selector)
 
     const nodes = Array.from(nodesSet.values()).map(nodeId => getNode(data.nodes, nodeId))
 
