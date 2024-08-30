@@ -1,3 +1,10 @@
+## [2.0.3](https://github.com/retejs/structures/compare/v2.0.2...v2.0.3) (2024-08-30)
+
+
+### Bug Fixes
+
+* build ([eb52d00](https://github.com/retejs/structures/commit/eb52d00de4f8be519355b640c3d656bf5518f623))
+
 ## [2.0.2](https://github.com/retejs/structures/compare/v2.0.1...v2.0.2) (2024-08-30)
 
 
