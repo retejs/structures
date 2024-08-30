@@ -13,13 +13,13 @@ export type Context<N extends BaseN, C extends BaseC> =
   | { getNodes(): N[], getConnections(): C[] }
 
 export type Structures<N extends BaseN, C extends BaseC> =
-& Subgraph<N, C>
-& Sets<N, C>
-& Mapping<N, C>
-& Traverse<N, C>
-& {
-  subgraph: Subgraph<N, C>
-  sets: Sets<N, C>
-  mapping: Mapping<N, C>
-  traverse: Traverse<N, C>
-}
+  & Subgraph<N, C>
+  & Sets<N, C>
+  & Mapping<N, C>
+  & Traverse<N, C>
+  & {
+    subgraph: Subgraph<N, C>
+    sets: Sets<N, C>
+    mapping: Mapping<N, C>
+    traverse: Traverse<N, C>
+  }
