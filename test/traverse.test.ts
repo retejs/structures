@@ -27,7 +27,8 @@ describe('Traverse', () => {
     const graph = structures(editor)
 
     expect(graph.roots().nodes()).toHaveLength(1)
-    expect(graph.roots().nodes().map(n => n.id)).toEqual([a.id])
+    expect(graph.roots().nodes()
+      .map(n => n.id)).toEqual([a.id])
   })
 
   it('leaves', async () => {
@@ -35,7 +36,8 @@ describe('Traverse', () => {
     const graph = structures(editor)
 
     expect(graph.leaves().nodes()).toHaveLength(1)
-    expect(graph.leaves().nodes().map(n => n.id)).toEqual([c.id])
+    expect(graph.leaves().nodes()
+      .map(n => n.id)).toEqual([c.id])
   })
 
   it('successors', async () => {
@@ -43,9 +45,12 @@ describe('Traverse', () => {
     const graph = structures(editor)
 
     expect(graph.successors(a.id).nodes()).toHaveLength(2)
-    expect(graph.successors(a.id).nodes().map(n => n.id).sort()).toEqual([b.id, c.id].sort())
+    expect(graph.successors(a.id).nodes()
+      .map(n => n.id)
+      .sort()).toEqual([b.id, c.id].sort())
     expect(graph.successors(b.id).nodes()).toHaveLength(1)
-    expect(graph.successors(b.id).nodes().map(n => n.id)).toEqual([c.id])
+    expect(graph.successors(b.id).nodes()
+      .map(n => n.id)).toEqual([c.id])
     expect(graph.successors(c.id).nodes()).toHaveLength(0)
   })
 
@@ -54,9 +59,12 @@ describe('Traverse', () => {
     const graph = structures(editor)
 
     expect(graph.predecessors(c.id).nodes()).toHaveLength(2)
-    expect(graph.predecessors(c.id).nodes().map(n => n.id).sort()).toEqual([a.id, b.id].sort())
+    expect(graph.predecessors(c.id).nodes()
+      .map(n => n.id)
+      .sort()).toEqual([a.id, b.id].sort())
     expect(graph.predecessors(b.id).nodes()).toHaveLength(1)
-    expect(graph.predecessors(b.id).nodes().map(n => n.id)).toEqual([a.id])
+    expect(graph.predecessors(b.id).nodes()
+      .map(n => n.id)).toEqual([a.id])
     expect(graph.predecessors(a.id).nodes()).toHaveLength(0)
   })
 })

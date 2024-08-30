@@ -1,9 +1,10 @@
 {
+    "extends": "rete-cli/configs/tsconfig.json",
     "compilerOptions": {
-        "strict": true,
         "esModuleInterop": true
     },
     "include": [
-        "src"
+        "src",
+        "test"
     ]
 }
